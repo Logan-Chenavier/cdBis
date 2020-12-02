@@ -124,12 +124,8 @@ jobs:
           command: git push https://heroku:830872a7-1ed3-4b23-b574-559b05788911@git.heroku.com/nameless-woodland-24979.git HEAD:main
       - run:
           name: Smoke Test
-          command: |
-            HTTPCODE=curl -s -o /dev/null -w "%{http_code}" https://nameless-woodland-24979.herokuapp.com/
-            if [[ "$HTTPCODE" -ne 200 ]]; then
-              echo "heroku app not responding, failing deploy" \
-              exit 1; \
-            fi
+          command: | 
+            HTTPCODE=`curl -s -o /dev/null -w "%{http_code}" https://nameless-woodland-24979.herokuapp.com/` if [[ "$HTTPCODE" -ne 200 ]]; then echo "heroku app not responding, failing deploy" \ exit 1; \ fi 
 
 workflows:
   version: 2
